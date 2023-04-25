@@ -1,5 +1,6 @@
 from networking import Networking
-from gamestats import Gamestats
+from gamestats import GameStats
+from inventory import Inventory
 import json
 
 
@@ -10,13 +11,20 @@ class Profile:
         self.steamid = self.pjson["steamid"]
         self.name = self.pjson["personaname"]
         self.gamestats = None
+        self.inventory = None
     def get_json(self):
         return self.pjson
 
     def get_gamestats(self):
         if self.gamestats is None:
-            self.gamestats = Gamestats()
-            self.csjson = json.loads(self.n.do_request(f"ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key={self.n.get_api_key()}&steamid={self.steamid}").text)
-            return self.csjson
+            self.gamestats = GameStats(self.n, self.steamid)
+            return self.gamestats
         else:
-            return self.csjson
+            return self.gamestats
+
+    def get_inventory(self):
+        if self.inventory is None:
+            self.inventory = Inventory(self.n, self.steamid)
+            return self.inventory
+        else:
+            return self.inventory
