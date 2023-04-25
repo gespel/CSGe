@@ -7,10 +7,10 @@ class Inventory:
     def __init__(self, n: Networking, steamid):
         self.n = n
         self.steamid = steamid
-        print(self.n.do_community_request(f"inventory/{self.steamid}/730/2?l=english&count=5000").text)
+        print(self.n.do_community_request(f"inventory/{self.steamid}/730/2?l=english&count=2000").status_code)
 
         self.inventoryjson = json.loads(
-            self.n.do_community_request(f"inventory/{self.steamid}/730/2?l=english&count=5000").text
+            self.n.do_community_request(f"inventory/{self.steamid}/730/2?l=english&count=2000").text
         )
         if self.inventoryjson != None:
             self.itemlist = self.parse_inventory_json()
