@@ -30,3 +30,9 @@ class GameStats:
             if name == entry["name"]:
                 return entry["value"]
         return 0
+
+    def get_achievements(self):
+        out = []
+        for entry in self.game_stats["playerstats"]["achievements"]:
+            out.append(entry["name"])
+        return out
