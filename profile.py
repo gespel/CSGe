@@ -15,14 +15,14 @@ class Profile:
     def get_json(self):
         return self.pjson
 
-    def get_gamestats(self):
+    def load_gamestats(self):
         if self.gamestats is None:
             self.gamestats = GameStats(self.n, self.steamid)
             return self.gamestats
         else:
             return self.gamestats
 
-    def get_inventory(self):
+    def load_inventory(self):
         if self.inventory is None:
             self.inventory = Inventory(self.n, self.steamid)
             return self.inventory

@@ -7,7 +7,6 @@ class Inventory:
     def __init__(self, n: Networking, steamid):
         self.n = n
         self.steamid = steamid
-        print(self.n.do_community_request(f"inventory/{self.steamid}/730/2?l=english&count=2000").status_code)
 
         self.inventoryjson = json.loads(
             self.n.do_community_request(f"inventory/{self.steamid}/730/2?l=english&count=2000").text
@@ -41,4 +40,21 @@ class Inventory:
         out = []
         for item in self.itemlist:
             out.append((item.get_name(), item.get_type()))
+        return out
+
+    def get_sorted_inventory(self):
+        out = []
+        unsorted = self.get_inventory_items_with_type()
+        for item in unsorted:
+            if not out:
+                sublist = [item]
+                out.append(sublist)
+            listexists = False
+            for sublist in out:
+                if sublist[0][1] == item[1]:
+                    sublist.append(item)
+                    listexists = True
+            if not listexists:
+                sublist = [item]
+                out.append(sublist)
         return out

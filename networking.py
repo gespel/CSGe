@@ -19,7 +19,6 @@ class Networking:
         return requests.get("https://api.steampowered.com/" + command, headers=self.headers)
 
     def do_community_request(self, command):
-        print("https://steamcommunity.com/" + command)
         return requests.get("https://steamcommunity.com/" + command, headers=self.headers)
 
     def get_api_key(self):
