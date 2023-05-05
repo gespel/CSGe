@@ -46,9 +46,6 @@ class Inventory:
         out = []
         unsorted = self.get_inventory_items_with_type()
         for item in unsorted:
-            if not out:
-                sublist = [item]
-                out.append(sublist)
             listexists = False
             for sublist in out:
                 if sublist[0][1] == item[1]:
@@ -57,4 +54,42 @@ class Inventory:
             if not listexists:
                 sublist = [item]
                 out.append(sublist)
+            if not out:
+                sublist = [item]
+                out.append(sublist)
+        return out
+
+    def get_rifles(self):
+        out = []
+        for item in self.get_inventory_items_with_type():
+            if "rifle" in item[1].lower():
+                out.append(item)
+        return out
+
+    def get_pistols(self):
+        out = []
+        for item in self.get_inventory_items_with_type():
+            if "pistol" in item[1].lower():
+                out.append(item)
+        return out
+
+    def get_covert_skins(self):
+        out = []
+        for item in self.get_inventory_items_with_type():
+            if "covert" in item[1].lower():
+                out.append(item)
+        return out
+
+    def get_classified_skins(self):
+        out = []
+        for item in self.get_inventory_items_with_type():
+            if "classified" in item[1].lower():
+                out.append(item)
+        return out
+
+    def get_restricted_skins(self):
+        out = []
+        for item in self.get_inventory_items_with_type():
+            if "restricted" in item[1].lower():
+                out.append(item)
         return out
